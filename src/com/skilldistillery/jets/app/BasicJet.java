@@ -11,8 +11,10 @@ public class BasicJet extends Jet implements PassengerCarrier{
 
 	@Override
 	public void fly() {
-		System.out.println("Yippie flying through the air is fun!");
-		this.toString();
+		double flyTime = this.getRange() / this.getSpeed();
+		System.out.println(this.toString());
+		System.out.println("Yippie flying through the air is fun! I can fly for up to " + flyTime + " minutes!");
+		System.out.println();
 
 	}
 

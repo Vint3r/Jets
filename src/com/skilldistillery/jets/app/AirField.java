@@ -1,7 +1,6 @@
 package com.skilldistillery.jets.app;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,6 +83,7 @@ public class AirField {
 			System.out.println("|1.)***************Cargo jet***************|");
 			System.out.println("|2.)**************Fighter jet**************|");
 			System.out.println("|3.)*************Passenger jet*************|");
+			System.out.println("|4.)****************Return*****************|");
 			System.out.println("+------------------------------------------+");
 			String userIn = input.nextLine();
 
@@ -92,19 +92,19 @@ public class AirField {
 			case "one":
 			case "cargo jet":
 			case "cargo":
-				addCargoJet(input);
+				addUserJet(input, userIn);
 				break;
 			case "2":
 			case "two":
 			case "fighter":
 			case "fighter jet":
-				addFighterJet(input);
+				addUserJet(input, userIn);
 				break;
 			case "3":
 			case "three":
 			case "passenger":
 			case "passenger jet":
-				addPassJet(input);
+				addUserJet(input, userIn);
 				break;
 			case "4":
 			case "four":
@@ -119,10 +119,10 @@ public class AirField {
 		}
 	}
 
-	public void addCargoJet(Scanner input) {
+	public void addUserJet(Scanner input, String userChoice) {
 		String model = "";
 		double speed = 0.0;
-		int range = 0, carryingCap = 0;
+		int range = 0;
 		long price = 0l;
 		boolean userStay = false;
 
@@ -151,11 +151,11 @@ public class AirField {
 				userStay = true;
 			}
 		} while (userStay);
-		
+
 		do {
 			System.out.println("Please enter a price for the jet you wish to add.");
 			try {
-				price = input.nextInt();
+				price = input.nextLong();
 				input.nextLine();
 				userStay = false;
 			} catch (Exception e) {
@@ -164,19 +164,90 @@ public class AirField {
 			}
 		} while (userStay);
 		
-		do {
-			System.out.println("Please enter a Cargo capacity for the jet you wish to add.");
-			try {
-				carryingCap = input.nextInt();
-				input.nextLine();
-				userStay = false;
-			} catch (Exception e) {
-				System.err.println("That is a invalid option for input Cargo capacity, please only type numbers");
-				userStay = true;
-			}
-		} while (userStay);
+		switch (userChoice.toLowerCase()) {
+		case "1":
+		case "one":
+		case "cargo":
+		case "cargo jet":
+			addCargoJet(model, speed, range, price, input);
+			break;
+		case "2":
+		case "two":
+		case "figher jet":
+		case "fighter":
+			addFighterJet(model, speed, range, price, input);
+			break;
+		case "3":
+		case "three":
+		case "passenger":
+		case "passenger jet":
+			addPassJet(model, speed, range, price, input);
+			break;
+		default:
+			System.err.println("That is not a valid input please try again.");
+			break;
+		}
+		
+	}
 
-		Jet jet = new CargoJet(model, speed, carryingCap, price, carryingCap);
+	public void addFighterJet(String model, double speed, int range, long price, Scanner input) {
+		System.out.println("What would you like for weapons on this jet? (Missiles, guns, etc.)");
+		String weapons = input.nextLine();
+		Jet jet = new FighterJet(model, speed, range, price, weapons);
 		addJet(jet);
+	}
+	
+	public void addCargoJet(String model, double speed, int range, long price, Scanner input) {
+		System.out.println("How much would you like this jet to carry?");
+		int carryingCap = input.nextInt();
+		Jet jet = new CargoJet(model, speed, range, price, carryingCap);
+		addJet(jet);
+	}
+	
+	public void addPassJet(String model, double speed, int range, long price, Scanner input) {
+		System.out.println("How many passengers would you like this jet to fit?");
+		int numOfPass = input.nextInt();
+		input.nextLine();
+		Jet jet = new BasicJet(model, speed, range, price, numOfPass);
+		addJet(jet);
+	}
+	
+	public void removeUserJet(Scanner input) {
+		boolean userChoice = false;
+		System.out.println();
+		System.out.println("Which jet would you like to remove?");
+		for (int i = 0; i < hangers.size(); i++) {
+			System.out.println((i + 1) + ".) " + hangers.get(i).toString());
+		}
+		do {
+			try {
+				int userIn = input.nextInt();
+				input.nextLine();
+				if (userIn <= hangers.size()) {
+					System.out.println("Are you sure you want to delete this plane?");
+					System.out.println(hangers.get(userIn - 1).toString());
+					String userRes = input.nextLine();
+					if (userRes.equalsIgnoreCase("yes")) {
+						removeJet(hangers.get(userIn - 1));
+						userChoice = false;
+						break;
+					} else {
+						userChoice = false;
+						break;
+					}
+				}
+			} catch (Exception e) {
+				
+			}
+		} while(userChoice);
+		
+	}
+	
+	public void loadPassengers() {
+		for (Jet jet : hangers) {
+			if (jet instanceof BasicJet) {
+				((BasicJet) jet).loadPass();
+			}
+		}
 	}
 }

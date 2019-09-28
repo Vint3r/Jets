@@ -10,8 +10,10 @@ public class CargoJet extends Jet implements CargoCarrier {
 	}
 	@Override
 	public void fly() {
-		System.out.println("Zoom Zoom");
-		this.toString();
+		double flyTime = this.getRange() / this.getSpeed();
+		System.out.println(this.toString());
+		System.out.println("Zoom Zoom. I can fly for up to " + flyTime + " minutes.");
+		System.out.println();
 	}
 
 	@Override

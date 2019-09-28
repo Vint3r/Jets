@@ -10,8 +10,10 @@ public class FighterJet extends Jet implements CombatReady {
 
 	@Override
 	public void fly() {
-		System.out.println("Zoom Zoom mofo.");
-		this.toString();
+		double flyTime = getRange() / getSpeed();
+		System.out.println(this.toString());
+		System.out.println("Zoom Zoom mofo. I can fly for up to " + flyTime + " minutes!");
+		System.out.println();
 	}
 
 	@Override

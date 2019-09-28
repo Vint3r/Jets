@@ -3,8 +3,6 @@ package com.skilldistillery.jets.app;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class JetsApplication {
@@ -84,10 +82,11 @@ public class JetsApplication {
 			System.out.println("|3.)*************View the fastest jet in the fleet.**************|");
 			System.out.println("|4.)************View the jet with the longest range.*************|");
 			System.out.println("|5.)************Load all the cargo jets in the field.************|");
-			System.out.println("|6.)******************Oh no! Enemies incoming!!******************|");
-			System.out.println("|7.)********************Add a jet to the fleet.******************|");
-			System.out.println("|8.)****************Remove a jet from the fleet.*****************|");
-			System.out.println("|9.)****************************Quit.****************************|");
+			System.out.println("|6.)*************Load all passengers onto the planes.************|");
+			System.out.println("|7.)******************Oh no! Enemies incoming!!******************|");
+			System.out.println("|8.)********************Add a jet to the fleet.******************|");
+			System.out.println("|9.)****************Remove a jet from the fleet.*****************|");
+			System.out.println("|10.)***************************Quit.****************************|");
 			System.out.println("+----------------------------------------------------------------+");
 
 			String choice = input.nextLine();
@@ -120,23 +119,29 @@ public class JetsApplication {
 				break;
 			case "6":
 			case "six":
-			case "oh no":
-				af.dogFight();
+			case "load passengers":
+				af.loadPassengers();
 				break;
 			case "7":
 			case "seven":
-			case "add":
-				af.addJetMenu(input);
+			case "oh no":
+				af.dogFight();
 				break;
 			case "8":
 			case "eight":
-			case "remove":
-//				ja.removeJet();
+			case "add":
+				af.addJetMenu(input);
 				break;
 			case "9":
 			case "nine":
+			case "remove":
+				af.removeUserJet(input);
+				break;
+			case "10":
+			case "ten":
 			case "quit":
 			case "end":
+				System.out.println("Thank you for using the Jets Application!! Have a good day!!");
 				userIn = false;
 				break;
 			default:
