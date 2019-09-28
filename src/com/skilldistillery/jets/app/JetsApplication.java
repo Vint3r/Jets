@@ -22,9 +22,9 @@ public class JetsApplication {
 		FileReader fr = null;
 		BufferedReader br = null;
 		long price = 0l;
-		Integer range = 0, numOfPass = 0, carryingCap = 0;
+		Integer range = 0, numOfPass = 0;
 		String model = "", type = "", weapons = "";
-		double speed = 0.0;
+		double speed = 0.0, carryingCap = 0.0;
 		try {
 			fr = new FileReader("JetFile.txt");
 			br = new BufferedReader(fr);
@@ -46,7 +46,7 @@ public class JetsApplication {
 					speed = Double.parseDouble(parts[2]);
 					range = Integer.parseInt(parts[3]);
 					price = Long.parseLong(parts[4]);
-					carryingCap = Integer.parseInt(parts[5]);
+					carryingCap = Double.parseDouble(parts[5]);
 					Jet jet = new CargoJet(model, speed, range, price, carryingCap);
 					af.addJet(jet);
 				} else if (type.contentEquals("p")) {
@@ -69,7 +69,7 @@ public class JetsApplication {
 	}
 
 	public void menuSystem() {
-		boolean userIn = true;
+boolean userIn = true;
 		while (userIn) {
 			System.out.println("+----------------------------------------------------------------+");
 			System.out.println("|****************************************************************|");
@@ -86,7 +86,8 @@ public class JetsApplication {
 			System.out.println("|7.)******************Oh no! Enemies incoming!!******************|");
 			System.out.println("|8.)********************Add a jet to the fleet.******************|");
 			System.out.println("|9.)****************Remove a jet from the fleet.*****************|");
-			System.out.println("|10.)***************************Quit.****************************|");
+			System.out.println("|10.)*******************Save all jets to file.*******************|");
+			System.out.println("|11.)***************************Quit.****************************|");
 			System.out.println("+----------------------------------------------------------------+");
 
 			String choice = input.nextLine();
@@ -139,6 +140,11 @@ public class JetsApplication {
 				break;
 			case "10":
 			case "ten":
+			case "save":
+				af.saveJets();
+				break;
+			case "11":
+			case "eleven":
 			case "quit":
 			case "end":
 				System.out.println("Thank you for using the Jets Application!! Have a good day!!");

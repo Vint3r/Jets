@@ -1,5 +1,11 @@
 package com.skilldistillery.jets.app;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -100,7 +106,6 @@ public class AirField {
 			case "fighter":
 			case "fighter jet":
 				addUserJet(input, userIn);
-				input.nextLine();
 				break;
 			case "3":
 			case "three":
@@ -254,6 +259,52 @@ public class AirField {
 			if (jet instanceof BasicJet) {
 				((BasicJet) jet).loadPass();
 			}
+		}
+	}
+	
+	public void saveJets() {
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		String type = "";
+		try {
+			File fold = new File("/Users/David/SD/Java/workspace/Jets/JetFile.txt");
+			fold.delete();
+			//File fnew = new File("/Users/David/SD/Java/workspace/Jets/JetFile1.txt");
+			fw = new FileWriter("/Users/David/SD/Java/workspace/Jets/JetFile.txt", true);
+			//bw = new BufferedWriter(fw);
+			for (Jet jet : hangers) {
+				if (jet instanceof FighterJet) {
+					type = "f, ";
+					type += jet.getModel()+ ", ";
+					type += jet.getSpeed()+ ", ";
+					type += jet.getRange()+ ", ";
+					type += jet.getPrice()+ ", ";
+					type += ((FighterJet) jet).getWeapons()+ "\n";
+					fw.write(type);
+				} else if (jet instanceof CargoJet) {
+					type = "c, ";
+					type += jet.getModel()+ ", ";
+					type += jet.getSpeed()+ ", ";
+					type += jet.getRange()+ ", ";
+					type += jet.getPrice()+ ", ";
+					type += ((CargoJet) jet).getCarryingCap()+ "\n";
+					fw.write(type);
+				} else if (jet instanceof BasicJet) {
+					type = "p, ";
+					type += jet.getModel()+ ", ";
+					type += jet.getSpeed()+ ", ";
+					type += jet.getRange()+ ", ";
+					type += jet.getPrice()+ ", ";
+					type += ((BasicJet) jet).getNumOfPassengers()+ "\n";
+					fw.write(type);
+				}
+			}
+			fw.close();
+			
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

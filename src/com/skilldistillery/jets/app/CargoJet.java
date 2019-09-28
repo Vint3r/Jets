@@ -4,7 +4,7 @@ public class CargoJet extends Jet implements CargoCarrier {
 
 	private double carryingCap;
 	
-	public CargoJet(String model, double speed, int range, long price, int carringCap) {
+	public CargoJet(String model, double speed, int range, long price, double carringCap) {
 		super(model, speed, range, price);
 		this.carryingCap = carringCap;
 	}

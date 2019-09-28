@@ -1,5 +1,5 @@
-p, Big Plane, 389.00, 1000, 2500000000, 6
-c, Planey Plane, 256.00, 1500, 165000000, 150000
-f, Shooty plane, 2000.00, 400, 450000000, guns
-c, McPlaney Face, 110.00, 750, 250000, 2000
-f, Shoot 'em up, 8000.00, 800, 1000000000, missiles
+p, Big Plane, 389.0, 38900, 2500000000, 6
+c, Planey Plane, 256.0, 25600, 165000000, 150000.0
+f, Shooty plane, 2000.0, 200000, 450000000, guns
+c, McPlaney Face, 110.0, 11000, 250000, 2000.0
+f, Shoot 'em up, 8000.0, 800000, 1000000000, missiles
