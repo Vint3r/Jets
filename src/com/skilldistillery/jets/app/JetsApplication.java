@@ -126,7 +126,7 @@ public class JetsApplication {
 			case "7":
 			case "seven":
 			case "add":
-//				ja.addJet();
+				af.addJetMenu(input);
 				break;
 			case "8":
 			case "eight":
@@ -144,5 +144,9 @@ public class JetsApplication {
 				break;
 			}
 		}
+	}
+	
+	public void addJet() {
+		
 	}
 }
