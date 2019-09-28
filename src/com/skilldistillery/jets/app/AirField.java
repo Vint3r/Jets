@@ -1,9 +1,6 @@
 package com.skilldistillery.jets.app;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -264,14 +261,11 @@ public class AirField {
 	
 	public void saveJets() {
 		FileWriter fw = null;
-		BufferedWriter bw = null;
 		String type = "";
 		try {
 			File fold = new File("/Users/David/SD/Java/workspace/Jets/JetFile.txt");
 			fold.delete();
-			//File fnew = new File("/Users/David/SD/Java/workspace/Jets/JetFile1.txt");
 			fw = new FileWriter("/Users/David/SD/Java/workspace/Jets/JetFile.txt", true);
-			//bw = new BufferedWriter(fw);
 			for (Jet jet : hangers) {
 				if (jet instanceof FighterJet) {
 					type = "f, ";
