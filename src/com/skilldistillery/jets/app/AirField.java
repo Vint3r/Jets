@@ -76,7 +76,7 @@ public class AirField {
 	public void addJetMenu(Scanner input) {
 		boolean userChoice = true;
 
-		while (userChoice) {
+		do {
 			System.out.println();
 			System.out.println("+------------------------------------------+");
 			System.out.println("|**What type of jet do you wish to enter?**|");
@@ -93,18 +93,21 @@ public class AirField {
 			case "cargo jet":
 			case "cargo":
 				addUserJet(input, userIn);
+				input.nextLine();
 				break;
 			case "2":
 			case "two":
 			case "fighter":
 			case "fighter jet":
 				addUserJet(input, userIn);
+				input.nextLine();
 				break;
 			case "3":
 			case "three":
 			case "passenger":
 			case "passenger jet":
 				addUserJet(input, userIn);
+				input.nextLine();
 				break;
 			case "4":
 			case "four":
@@ -116,7 +119,7 @@ public class AirField {
 				System.out.println("That is not a valid input, please try again");
 				break;
 			}
-		}
+		} while (userChoice);
 	}
 
 	public void addUserJet(Scanner input, String userChoice) {
@@ -213,7 +216,7 @@ public class AirField {
 	}
 	
 	public void removeUserJet(Scanner input) {
-		boolean userChoice = false;
+		boolean userChoice = true;
 		System.out.println();
 		System.out.println("Which jet would you like to remove?");
 		for (int i = 0; i < hangers.size(); i++) {
@@ -224,7 +227,7 @@ public class AirField {
 				int userIn = input.nextInt();
 				input.nextLine();
 				if (userIn <= hangers.size()) {
-					System.out.println("Are you sure you want to delete this plane?");
+					System.out.println("Are you sure you want to delete this plane? (yes/no)");
 					System.out.println(hangers.get(userIn - 1).toString());
 					String userRes = input.nextLine();
 					if (userRes.equalsIgnoreCase("yes")) {
@@ -235,9 +238,12 @@ public class AirField {
 						userChoice = false;
 						break;
 					}
+				} else if (userIn > hangers.size()) {
+					System.out.println("That is not a valid input, there are only " + hangers.size() +
+							" jets in the air field, you entered " + userIn);
 				}
 			} catch (Exception e) {
-				
+				System.err.println("That is not a valid input, please only enter a number, not a word...");
 			}
 		} while(userChoice);
 		
