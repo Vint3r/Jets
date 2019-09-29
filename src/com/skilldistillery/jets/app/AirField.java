@@ -28,7 +28,70 @@ public class AirField {
 		return hangers.size();
 	}
 
-	public void flyJets() {
+	public void flyJets(Scanner input) {
+		boolean userIn = true;
+		do {
+			System.out.println("Would you like to fly one or all jets? Or type quit to return to main menu.");
+			String userChoice = input.nextLine();
+			
+			switch (userChoice.toLowerCase()) {
+			case "one":
+			case "single":
+			case "1":
+				flySingleJet(input);
+				break;
+			case "multiple":
+			case "all":
+				flyAllJets();
+				break;
+			case "quit":
+			case "cancel":
+			case "return":
+				System.out.println("Returning to main menu...");
+				userIn = false;
+				break;
+			default:
+				System.err.println("That is not a valid input please try again.");
+				break;
+			}
+		} while (userIn);
+		
+	}
+	
+	public void flySingleJet(Scanner input) {
+		boolean userChoice = true;
+		System.out.println("Which jet would you like to fly?");
+		for (int i = 0; i < hangers.size(); i++) {
+			System.out.println((i + 1) + ".)" + hangers.get(i).toString());
+		}
+		System.out.println("Type the number for the jet you wish to fly");
+		do {
+			try {
+				int userIn = input.nextInt();
+				input.nextLine();
+				if (userIn <= hangers.size()) {
+					System.out.println("Are you sure you want to fly this plane? (yes/no)");
+					System.out.println(hangers.get(userIn - 1).toString());
+					String userRes = input.nextLine();
+					if (userRes.equalsIgnoreCase("yes")) {
+						hangers.get(userIn - 1).fly();
+						userChoice = false;
+						break;
+					} else {
+						userChoice = false;
+						break;
+					}
+				} else if (userIn > hangers.size()) {
+					System.out.println("That is not a valid input, there are only " + hangers.size() +
+							" jets in the air field, you entered " + userIn);
+				}
+			} catch (Exception e) {
+				System.err.println("That is not a valid input, please only enter a number, not a word...");
+			}
+		} while(userChoice);
+	}
+	
+	public void flyAllJets() {
 		for (int i = 0; i < hangers.size(); i++) {
 			hangers.get(i).fly();
 		}

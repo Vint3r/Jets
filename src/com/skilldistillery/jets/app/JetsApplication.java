@@ -78,7 +78,7 @@ boolean userIn = true;
 			System.out.println("|****************************************************************|");
 			System.out.println("|================================================================|");
 			System.out.println("|1.)****************List every plane in the fleet.***************|");
-			System.out.println("|2.)***********Fly all jets currently in the air field.**********|");
+			System.out.println("|2.)************Fly jet(s) currently in the air field.***********|");
 			System.out.println("|3.)*************View the fastest jet in the fleet.**************|");
 			System.out.println("|4.)************View the jet with the longest range.*************|");
 			System.out.println("|5.)************Load all the cargo jets in the field.************|");
@@ -101,7 +101,7 @@ boolean userIn = true;
 			case "2":
 			case "two":
 			case "fly":
-				af.flyJets();
+				af.flyJets(input);
 				break;
 			case "3":
 			case "three":
