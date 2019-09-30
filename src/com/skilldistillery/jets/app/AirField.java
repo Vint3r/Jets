@@ -159,7 +159,6 @@ public class AirField {
 			case "cargo jet":
 			case "cargo":
 				addUserJet(input, userIn);
-				input.nextLine();
 				break;
 			case "2":
 			case "two":
@@ -172,7 +171,6 @@ public class AirField {
 			case "passenger":
 			case "passenger jet":
 				addUserJet(input, userIn);
-				input.nextLine();
 				break;
 			case "4":
 			case "four":
@@ -268,6 +266,7 @@ public class AirField {
 	public void addCargoJet(String model, double speed, int range, long price, Scanner input) {
 		System.out.println("How much would you like this jet to carry?");
 		int carryingCap = input.nextInt();
+		input.nextLine();
 		Jet jet = new CargoJet(model, speed, range, price, carryingCap);
 		addJet(jet);
 	}
